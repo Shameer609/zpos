@@ -179,6 +179,6 @@ return [
 "use_for_repair_help_text" =>" که چک شوی وي, نښه به په ډراپاون کې ښودل شي <code> ترمیم موډل </code> کې کارول کیږي ",
 "save_and_upload_docs" => "لاسوندونه خوندي او اپلوډ کړئ",
 "upload_job_sheet_docs" => "د دندې شیټ لاسوندونه اپلوډ کړئ",
-"upload_docs" => "ډیسک اپلوډ"
+"upload_docs" => "ډیسک اپلوډ",
 "document" => "سند",
 ];
