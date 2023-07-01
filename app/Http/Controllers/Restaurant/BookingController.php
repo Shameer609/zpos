@@ -7,6 +7,10 @@ use App\Contact;
 use App\CustomerGroup;
 use App\Restaurant\Booking;
 use App\User;
+use App\AccountTransaction;
+use App\Product;
+use App\booking_items;
+use App\booking_payment;
 use App\Utils\Util;
 use DB;
 use Illuminate\Http\Request;
@@ -67,8 +71,25 @@ class BookingController extends Controller
 
         $types = Contact::getContactTypes();
         $customer_groups = CustomerGroup::forDropdown($business_id);
+        
+        $product=Product::All();
+        
+        
+        
+        
+        $waiting = Booking::where('booking_status','waiting')->whereDate('booking_end', '<=',  date('Y-m-d H:i:s'))->get();
+        $booked = Booking::where('booking_status','booked')->whereDate('booking_end', '<=',  date('Y-m-d H:i:s'))->get();
+        foreach($waiting as $key =>$val){
+           Booking::where('id', $val['id'])->update(['booking_status' => 'cancelled']);
+        }
+        foreach($booked as $key =>$val){
+            Booking::where('id', $val['id'])->update(['booking_status' => 'completed']);
+        }
+        
+        
+        
 
-        return view('restaurant.booking.index', compact('business_locations', 'customers', 'correspondents', 'types', 'customer_groups'));
+        return view('restaurant.booking.index', compact('business_locations','product','customers', 'correspondents', 'types', 'customer_groups'));
     }
 
     /**
@@ -123,6 +144,44 @@ class BookingController extends Controller
                     $input['booking_end'] = $booking_end;
                     $booking = Booking::createBooking($input);
                     
+                      
+                $Particular=$input['particular'];
+                for ($i=0; $i < sizeof($Particular); $i++) {
+                $booking_items=new booking_items;
+                $booking_items->booking_id=$booking->id;
+                $booking_items->particular=$input['particular'][$i];
+                $booking_items->Item_amount=$input['Item_amount'][$i];
+                $booking_items->instructions=$input['instructions'][$i];
+                $booking_items->Discount=$input['discount'];
+                $booking_items->total=$input['total'];
+                $booking_items->save();
+                }
+                
+               $booking_payment=new booking_payment;
+               $booking_payment->booking_id=$booking->id;
+               $booking_payment->total_amount=$input['total_amount'];
+               $booking_payment->advance_amount	=$input['advance_amount'];
+               $booking_payment->save();
+               
+               
+               $account_transactions=new AccountTransaction;
+               $account_transactions->account_id=$input['contact_id'];
+               $account_transactions->type="debit";
+               $account_transactions->amount=$input['total_amount'];
+        
+               $account_transactions->save();
+               
+               $account_transactions=new AccountTransaction;
+               $account_transactions->account_id=$input['contact_id'];
+               $account_transactions->type="credit";
+               $account_transactions->amount=$input['advance_amount'];
+         
+               $account_transactions->save();
+                
+                
+                    
+              
+                    
                     $output = ['success' => 1,
                         'msg' => trans("lang_v1.added_success"),
                     ];
@@ -150,7 +209,7 @@ class BookingController extends Controller
         } catch (\Exception $e) {
             \Log::emergency("File:" . $e->getFile(). "Line:" . $e->getLine(). "Message:" . $e->getMessage());
             $output = ['success' => 0,
-                            'msg' => __("messages.something_went_wrong")
+                            'msg' => $e->getMessage()
                         ];
         }
         return $output;
@@ -164,6 +223,7 @@ class BookingController extends Controller
      */
     public function show($id)
     {
+        // dd($id);
         if (request()->ajax()) {
             $business_id = request()->session()->get('user.business_id');
             $booking = Booking::where('business_id', $business_id)
@@ -180,7 +240,23 @@ class BookingController extends Controller
                     'completed' => __('restaurant.completed'),
                     'cancelled' => __('restaurant.cancelled'),
                 ];
-                return view('restaurant.booking.show', compact('booking', 'booking_start', 'booking_end', 'booking_statuses'));
+                
+            $booking_item=booking_items::where('booking_id',$id)->get();
+            
+            $booking_item = booking_items::where('booking_id',$id)->leftJoin('products', function ($join) {
+            $join->on('booking_items.particular', '=', 'products.id');
+            })->get();
+            
+            $booking_total=booking_items::where('booking_id',$id)->first();
+            $booking_payment=booking_payment::where('booking_id',$id)->get();
+            
+            // dd($booking_payment);
+            // $product=
+                
+                // dd($booking_item);
+                
+                
+                return view('restaurant.booking.show', compact('booking', 'booking_start', 'booking_end', 'booking_statuses','booking_item','booking_total','booking_payment'));
             }
         }
     }

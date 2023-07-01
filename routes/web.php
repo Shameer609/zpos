@@ -15,7 +15,7 @@ include_once('install_r.php');
 
 Route::middleware(['setData'])->group(function () {
     Route::get('/', function () {
-        return view('welcome');
+        return view('auth/login');
     });
 
     Auth::routes();
@@ -126,7 +126,10 @@ Route::middleware(['setData', 'auth', 'SetSessionData', 'language', 'timezone', 
     Route::get('/sells/quotations', 'SellController@getQuotations');
     Route::get('/sells/draft-dt', 'SellController@getDraftDatables');
     Route::resource('sells', 'SellController')->except(['show']);
-
+    Route::get('sale_activity','SaleActivityController@index')->name('sale_activity');
+    Route::post('sale_activity/add','SaleActivityController@store')->name('sale_activity.add');
+    Route::get('getDoctors','SaleActivityController@getDoctors')->name('getDoctors');
+    Route::get('getCities','SaleActivityController@getDoctors')->name('getCities');
     Route::get('/import-sales', 'ImportSalesController@index');
     Route::post('/import-sales/preview', 'ImportSalesController@preview');
     Route::post('/import-sales', 'ImportSalesController@import');

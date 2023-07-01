@@ -5,7 +5,7 @@
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <h1>@lang('product.add_new_product')</h1>
+    <h1>Add New Item</h1>
     <!-- <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
         <li class="active">Here</li>
@@ -23,7 +23,7 @@
         <div class="row">
         <div class="col-sm-4">
           <div class="form-group">
-            {!! Form::label('name', __('product.product_name') . ':*') !!}
+            {!! Form::label('name', __('Item Name') . ':*') !!}
               {!! Form::text('name', !empty($duplicate_product->name) ? $duplicate_product->name : null, ['class' => 'form-control', 'required',
               'placeholder' => __('product.product_name')]); !!}
           </div>

@@ -282,9 +282,9 @@ class ExpenseController extends Controller
         $business_id = request()->session()->get('user.business_id');
         
         //Check if subscribed or not
-        if (!$this->moduleUtil->isSubscribed($business_id)) {
-            return $this->moduleUtil->expiredResponse(action('ExpenseController@index'));
-        }
+        // if (!$this->moduleUtil->isSubscribed($business_id)) {
+        //     return $this->moduleUtil->expiredResponse(action('ExpenseController@index'));
+        // }
 
         $business_locations = BusinessLocation::forDropdown($business_id, false, true);
 

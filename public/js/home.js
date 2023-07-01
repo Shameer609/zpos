@@ -158,6 +158,12 @@ function update_statistics(start, end) {
             $('.total_purchase').html(__currency_trans_from_en(data.total_purchase, true));
             $('.purchase_due').html(__currency_trans_from_en(data.purchase_due, true));
 
+
+
+            $('.total_customer').html(data.total_customer);
+            $('.total_products').html(data.total_products);
+            $('.total_sells').html(data.total_sells);
+
             //sell details
             $('.total_sell').html(__currency_trans_from_en(data.total_sell, true));
             $('.invoice_due').html(__currency_trans_from_en(data.invoice_due, true));

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\BusinessLocation;
 
 use App\Charts\CommonChart;
+use App\Contact;
+use App\Product;
 use App\Currency;
 use App\Transaction;
 use App\Utils\BusinessUtil;
@@ -257,7 +259,9 @@ class HomeController extends Controller
 
             $output['invoice_due'] = $sell_details['invoice_due'];
             $output['total_expense'] = $transaction_totals['total_expense'];
-            
+            $output['total_customer'] = Contact::where('type','customer')->get()->count();
+            $output['total_products'] = Product::All()->count();
+            $output['total_sells'] = Transaction::where('type','sell')->get()->count();
             return $output;
         }
     }

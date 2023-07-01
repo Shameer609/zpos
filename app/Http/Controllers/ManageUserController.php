@@ -96,11 +96,11 @@ class ManageUserController extends Controller
         $business_id = request()->session()->get('user.business_id');
 
         //Check if subscribed or not, then check for users quota
-        if (!$this->moduleUtil->isSubscribed($business_id)) {
-            return $this->moduleUtil->expiredResponse();
-        } elseif (!$this->moduleUtil->isQuotaAvailable('users', $business_id)) {
-            return $this->moduleUtil->quotaExpiredResponse('users', $business_id, action('ManageUserController@index'));
-        }
+        // if (!$this->moduleUtil->isSubscribed($business_id)) {
+        //     return $this->moduleUtil->expiredResponse();
+        // } elseif (!$this->moduleUtil->isQuotaAvailable('users', $business_id)) {
+        //     return $this->moduleUtil->quotaExpiredResponse('users', $business_id, action('ManageUserController@index'));
+        // }
 
         $roles  = $this->getRolesArray($business_id);
         $username_ext = $this->moduleUtil->getUsernameExtension();

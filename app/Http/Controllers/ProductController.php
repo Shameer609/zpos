@@ -342,11 +342,11 @@ class ProductController extends Controller
         $business_id = request()->session()->get('user.business_id');
 
         //Check if subscribed or not, then check for products quota
-        if (!$this->moduleUtil->isSubscribed($business_id)) {
-            return $this->moduleUtil->expiredResponse();
-        } elseif (!$this->moduleUtil->isQuotaAvailable('products', $business_id)) {
-            return $this->moduleUtil->quotaExpiredResponse('products', $business_id, action('ProductController@index'));
-        }
+        // if (!$this->moduleUtil->isSubscribed($business_id)) {
+        //     return $this->moduleUtil->expiredResponse();
+        // } elseif (!$this->moduleUtil->isQuotaAvailable('products', $business_id)) {
+        //     return $this->moduleUtil->quotaExpiredResponse('products', $business_id, action('ProductController@index'));
+        // }
 
         $categories = Category::forDropdown($business_id, 'product');
 

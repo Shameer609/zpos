@@ -34,7 +34,7 @@
         	</div>
     	   <br>
     	   <div class="row row-custom">
-            	<div class="col-md-3 col-sm-6 col-xs-12 col-custom">
+            	<div class="col-md-3 col-sm-6 col-xs-12 col-custom hide">
             	   <div class="info-box info-box-new-style">
             	        <span class="info-box-icon bg-aqua"><i class="ion ion-cash"></i></span>
 
@@ -47,7 +47,7 @@
         	       <!-- /.info-box -->
         	    </div>
         	    <!-- /.col -->
-        	    <div class="col-md-3 col-sm-6 col-xs-12 col-custom">
+        	    <div class="col-md-3 col-sm-6 col-xs-12 col-custom hide">
         	       <div class="info-box info-box-new-style">
             	        <span class="info-box-icon bg-aqua"><i class="ion ion-ios-cart-outline"></i></span>
 
@@ -60,6 +60,51 @@
         	      <!-- /.info-box -->
         	    </div>
         	    <!-- /.col -->
+
+              <div class="col-md-3 col-sm-6 col-xs-12 col-custom">
+                <div class="info-box info-box-new-style">
+                     <span class="info-box-icon bg-green"><i class="fa fa-users"></i></span>
+
+                     <div class="info-box-content">
+                       <span class="info-box-text">Total Customers</span>
+                       <span class="info-box-number total_customer"><i class="fas fa-sync fa-spin fa-fw margin-bottom"></i></span>
+                     </div>
+                     <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+             </div>
+
+             <div class="col-md-3 col-sm-6 col-xs-12 col-custom">
+              <div class="info-box info-box-new-style">
+                   <span class="info-box-icon bg-aqua"><i class="fa fa-cubes"></i></span>
+
+                   <div class="info-box-content">
+                     <span class="info-box-text">Total Products</span>
+                     <span class="info-box-number total_products"><i class="fas fa-sync fa-spin fa-fw margin-bottom"></i></span>
+                   </div>
+                   <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+           </div>
+
+
+           <div class="col-md-3 col-sm-6 col-xs-12 col-custom">
+            <div class="info-box info-box-new-style">
+                 <span class="info-box-icon bg-orange"><i class="fa fa-cubes"></i></span>
+
+                 <div class="info-box-content">
+                   <span class="info-box-text">Total Orders</span>
+                   <span class="info-box-number total_sells"><i class="fas fa-sync fa-spin fa-fw margin-bottom"></i></span>
+                 </div>
+                 <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+         </div>
+         <!-- /.col -->
+
+
+
+
         	    <div class="col-md-3 col-sm-6 col-xs-12 col-custom">
         	       <div class="info-box info-box-new-style">
             	        <span class="info-box-icon bg-yellow">
@@ -95,8 +140,8 @@
         	      <!-- /.info-box -->
         	    </div>
     	    <!-- /.col -->
-            </div>
-          	<div class="row row-custom">
+            {{-- </div> --}}
+          	{{-- <div class="row row-custom"> --}}
                 <!-- expense -->
                 <div class="col-md-3 col-sm-6 col-xs-12 col-custom">
                     <div class="info-box info-box-new-style">

@@ -140,6 +140,14 @@
 					<br/>
 					<strong>{{ $receipt_details->customer_rp_label }}</strong> {{ $receipt_details->customer_total_rp }}
 				@endif
+				@if(!empty($receipt_details->sell_custom_field_1_label))
+					<br/>
+					<strong>{{ $receipt_details->sell_custom_field_1_label }}</strong> {{ $receipt_details->sell_custom_field_1_value }}
+				@endif
+				@if(!empty($receipt_details->sell_custom_field_2_label))
+					<br/>
+					<strong>{{ $receipt_details->sell_custom_field_2_label }}</strong> {{ $receipt_details->sell_custom_field_2_value }}
+				@endif
 			</span>
 
 			<span class="pull-right text-left">

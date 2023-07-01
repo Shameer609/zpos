@@ -290,6 +290,7 @@ class SellPosController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         if (!auth()->user()->can('sell.create') && !auth()->user()->can('direct_sell.access') && !auth()->user()->can('so.create') ) {
             abort(403, 'Unauthorized action.');
         }
@@ -334,7 +335,6 @@ class SellPosController extends Controller
                         ->with('status', $output);
                 }
             }
-
             if (!empty($input['products'])) {
                 $business_id = $request->session()->get('user.business_id');
 
@@ -1349,6 +1349,7 @@ class SellPosController extends Controller
             foreach ($sales_order->sell_lines as $sell_line) {
                 $quantity = $sell_line->quantity - $sell_line->so_quantity_invoiced;
                 $sell_line->qty_available = $quantity;
+                $sell_line->formatted_qty_available = $this->transactionUtil->num_f($quantity);
                 $sell_line->formatted_qty_available = $this->transactionUtil->num_f($quantity);
                 $sell_line_row = $this->getSellLineRow($sell_line->variation_id, $sales_order->location_id, $quantity, $row_count, true, $sell_line);
                 $html .= $sell_line_row['html_content'];

@@ -623,13 +623,13 @@ class SellController extends Controller
         $business_id = request()->session()->get('user.business_id');
 
         //Check if subscribed or not, then check for users quota
-        if (!$this->moduleUtil->isSubscribed($business_id)) {
-            return $this->moduleUtil->expiredResponse();
-        } elseif (!$this->moduleUtil->isQuotaAvailable('invoices', $business_id)) {
-            return $this->moduleUtil->quotaExpiredResponse('invoices', $business_id, action('SellController@index'));
-        }
+        // if (!$this->moduleUtil->isSubscribed($business_id)) {
+        //     return $this->moduleUtil->expiredResponse();
+        // } elseif (!$this->moduleUtil->isQuotaAvailable('invoices', $business_id)) {
+        //     return $this->moduleUtil->quotaExpiredResponse('invoices', $business_id, action('SellController@index'));
+        // }
 
-        $walk_in_customer = $this->contactUtil->getWalkInCustomer($business_id);
+        // $walk_in_customer = $this->contactUtil->getWalkInCustomer($business_id);
         
         $business_details = $this->businessUtil->getDetails($business_id);
         $taxes = TaxRate::forBusinessDropdown($business_id, true, true);
@@ -718,7 +718,6 @@ class SellController extends Controller
             ->with(compact(
                 'business_details',
                 'taxes',
-                'walk_in_customer',
                 'business_locations',
                 'bl_attributes',
                 'default_location',

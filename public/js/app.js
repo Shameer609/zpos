@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    $("#shipping_details").closest('.box').hide();
     getTotalUnreadNotifications();
     $('body').on('click', 'label', function(e) {
         var field_id = $(this).attr('for');

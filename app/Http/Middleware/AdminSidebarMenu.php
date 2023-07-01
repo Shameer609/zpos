@@ -80,11 +80,11 @@ class AdminSidebarMenu
                                 __('report.customer'),
                                 ['icon' => 'fa fas fa-star', 'active' => request()->input('type') == 'customer']
                             );
-                            $sub->url(
-                                action('CustomerGroupController@index'),
-                                __('lang_v1.customer_groups'),
-                                ['icon' => 'fa fas fa-users', 'active' => request()->segment(1) == 'customer-group']
-                            );
+                            // $sub->url(
+                            //     action('CustomerGroupController@index'),
+                            //     __('lang_v1.customer_groups'),
+                            //     ['icon' => 'fa fas fa-users', 'active' => request()->segment(1) == 'customer-group']
+                            // );
                         }
                         if (auth()->user()->can('supplier.create') || auth()->user()->can('customer.create')) {
                             $sub->url(
@@ -112,19 +112,19 @@ class AdminSidebarMenu
                 auth()->user()->can('category.view') || auth()->user()->can('brand.create') ||
                 auth()->user()->can('unit.create') || auth()->user()->can('category.create')) {
                 $menu->dropdown(
-                    __('sale.products'),
+                    'Products',
                     function ($sub) {
                         if (auth()->user()->can('product.view')) {
                             $sub->url(
                                 action('ProductController@index'),
-                                __('lang_v1.list_products'),
+                                __('List Products'),
                                 ['icon' => 'fa fas fa-list', 'active' => request()->segment(1) == 'products' && request()->segment(2) == '']
                             );
                         }
                         if (auth()->user()->can('product.create')) {
                             $sub->url(
                                 action('ProductController@create'),
-                                __('product.add_product'),
+                                __('Add Products'),
                                 ['icon' => 'fa fas fa-plus-circle', 'active' => request()->segment(1) == 'products' && request()->segment(2) == 'create']
                             );
                         }
@@ -192,7 +192,7 @@ class AdminSidebarMenu
                     ['icon' => 'fa fas fa-cubes', 'id' => 'tour_step5']
                 )->order(20);
             }
-
+            
             //Purchase dropdown
             if (in_array('purchases', $enabled_modules) && (auth()->user()->can('purchase.view') || auth()->user()->can('purchase.create') || auth()->user()->can('purchase.update'))) {
                 $menu->dropdown(
@@ -233,7 +233,7 @@ class AdminSidebarMenu
             //Sell dropdown
             if ($is_admin || auth()->user()->hasAnyPermission(['sell.view', 'sell.create', 'direct_sell.access', 'view_own_sell_only', 'view_commission_agent_sell', 'access_shipping', 'access_own_shipping', 'access_commission_agent_shipping', 'access_sell_return', 'direct_sell.view', 'direct_sell.update', 'access_own_sell_return']) ) {
                 $menu->dropdown(
-                    __('sale.sale'),
+                    'Orders',
                     function ($sub) use ($enabled_modules, $is_admin, $pos_settings) {
                         if (!empty($pos_settings['enable_sales_order']) && ($is_admin ||auth()->user()->hasAnyPermission(['so.view_own', 'so.view_all', 'so.create'])) ) {
                             $sub->url(
@@ -246,14 +246,14 @@ class AdminSidebarMenu
                         if ($is_admin || auth()->user()->hasAnyPermission(['sell.view', 'sell.create', 'direct_sell.access', 'direct_sell.view', 'view_own_sell_only', 'view_commission_agent_sell', 'access_shipping', 'access_own_shipping', 'access_commission_agent_shipping']) ) {
                             $sub->url(
                                 action('SellController@index'),
-                                __('lang_v1.all_sales'),
+                                'ALL Orders',
                                 ['icon' => 'fa fas fa-list', 'active' => request()->segment(1) == 'sells' && request()->segment(2) == null]
                             );
                         }
                         if (in_array('add_sale', $enabled_modules) && auth()->user()->can('direct_sell.access')) {
                             $sub->url(
                                 action('SellController@create'),
-                                __('sale.add_sale'),
+                                'Add Orders',
                                 ['icon' => 'fa fas fa-plus-circle', 'active' => request()->segment(1) == 'sells' && request()->segment(2) == 'create' && empty(request()->get('status'))]
                             );
                         }
@@ -342,6 +342,11 @@ class AdminSidebarMenu
                                 ['icon' => 'fa fas fa-file-import', 'active' => request()->segment(1) == 'import-sales']
                             );
                         }
+                            $sub->url(
+                                route('sale_activity'),
+                                __('Sale Activity'),
+                                ['icon' => 'fa fas fa-plus-circle', 'active' => request()->segment(1) == 'sale_activity']
+                            );
                     },
                     ['icon' => 'fa fas fa-arrow-circle-up', 'id' => 'tour_step7']
                 )->order(30);
@@ -640,9 +645,9 @@ class AdminSidebarMenu
             }
 
             //Modules menu
-            if (auth()->user()->can('manage_modules')) {
-                $menu->url(action('Install\ModulesController@index'), __('lang_v1.modules'), ['icon' => 'fa fas fa-plug', 'active' => request()->segment(1) == 'manage-modules'])->order(60);
-            }
+            // if (auth()->user()->can('manage_modules')) {
+            //     $menu->url(action('Install\ModulesController@index'), __('lang_v1.modules'), ['icon' => 'fa fas fa-plug', 'active' => request()->segment(1) == 'manage-modules'])->order(60);
+            // }
 
             //Booking menu
             if (in_array('booking', $enabled_modules) && (auth()->user()->can('crud_all_bookings') || auth()->user()->can('crud_own_bookings'))) {

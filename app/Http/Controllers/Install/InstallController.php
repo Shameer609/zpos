@@ -200,18 +200,18 @@ class InstallController extends Controller
             }
 
             //Check for activation key
-            if ($this->macActivationKeyChecker) {
-                $licence_code = $request->get('MAC_LICENCE_CODE');
-                $licence_valid = mac_verify_licence_code($licence_code);
-                if (!$licence_valid) {
-                    return redirect()->back()
-                        ->with('error', 'Invalid Activation Licence Code!!')
-                        ->withInput();
-                    die('Invalid Purchase Code');
-                }
+            // if ($this->macActivationKeyChecker) {
+            //     $licence_code = $request->get('MAC_LICENCE_CODE');
+            //     $licence_valid = mac_verify_licence_code($licence_code);
+            //     if (!$licence_valid) {
+            //         return redirect()->back()
+            //             ->with('error', 'Invalid Activation Licence Code!!')
+            //             ->withInput();
+            //         die('Invalid Purchase Code');
+            //     }
 
-                $input['MAC_LICENCE_CODE'] = $licence_code;
-            }
+            //     $input['MAC_LICENCE_CODE'] = $licence_code;
+            // }
 
             //Get .env file details and write the contents in it.
             $envPathExample = base_path('.env.example');

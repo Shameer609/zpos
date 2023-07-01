@@ -1,7 +1,17 @@
+
 @extends('layouts.app')
 @section('title', __('restaurant.bookings'))
 
+
 @section('content')
+
+<style>
+    .fc-content{
+        font-size: 14px;
+        font-weight: 700;
+    }
+</style>
+
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -193,6 +203,9 @@
             $('#add_booking_modal').on('hidden.bs.modal', function (e) {
                 booking_form_validator.destroy();
                 reset_booking_form();
+                $('#add_booking_form')[0].reset();
+                 $("#booking #tbody").find("tr:gt(0)").remove();
+                // location.reload();
             });
 
             $('form#add_booking_form #start_time').datetimepicker({
@@ -317,6 +330,9 @@
             // $('select#booking_customer_id').val('').change();
             $('select#correspondent').val('').change();
             $('#booking_note, #start_time, #end_time').val('');
+            $('#start_time').data("DateTimePicker").clear();
+            $('#end_time').data("DateTimePicker").clear();
+             
         }
 
         function reload_calendar(){
@@ -408,6 +424,74 @@
                 .removeAttr('disabled');
             $('form#quick_add_contact')[0].reset();
         });
+        
+        $(document).ready(function(){
+
+        });
+        // function sum(){
+        // types=[];
+        // $("input[name='Item_amount']").each(function(){
+        //     types.push($(this).val());
+        // })
+        // // console.log(types);
+        //  $.each(types , function(index , val){
+             
+            
+        //      console.log( types+=val);
+        //  })
+        // };
+        function total_value()
+        {
+
+
+
+        var sum=0;
+        
+        $(".item-amount").each(function(ele,ind)
+        {
+            
+        
+        sum+= parseInt($(ind).val());
+            
+        });
+       
+        var discount=$('.discount').val();
+        
+        var result=sum - discount;
+        $('.total_val').val(result);
+            
+        }
+        
+        function add_row(el){
+      	$('#booking #tbody tr').each(function(){
+				$(this).find('#particular').select2('destroy')
+			})
+			var tr = $("#booking #tbody tr:last").clone();
+			// console.log(tr);
+			$("#booking #tbody tr:last").after(tr);
+			
+			$('#booking #tbody tr').each(function(){
+			$(this).find('#particular').select2()
+			})
+			
+			
+		}
+		
+		function remove_row(el) {
+		var tr_length = $("#booking #tbody tr").length;
+		if(tr_length > 1){
+			var tr = $(el).closest("tr").remove();
+			reIndexTable();
+			update_table_sr_number();
+		}else{
+			alert("At least one row required");
+		}		
+	}
+        
+        
 
     </script>
+    
+    
 @endsection
+

@@ -135,9 +135,9 @@ class StockAdjustmentController extends Controller
         $business_id = request()->session()->get('user.business_id');
 
         //Check if subscribed or not
-        if (!$this->moduleUtil->isSubscribed($business_id)) {
-            return $this->moduleUtil->expiredResponse(action('StockAdjustmentController@index'));
-        }
+        // if (!$this->moduleUtil->isSubscribed($business_id)) {
+        //     return $this->moduleUtil->expiredResponse(action('StockAdjustmentController@index'));
+        // }
 
         $business_locations = BusinessLocation::forDropdown($business_id);
 

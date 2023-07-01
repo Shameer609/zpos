@@ -229,9 +229,9 @@ class PurchaseController extends Controller
         $business_id = request()->session()->get('user.business_id');
 
         //Check if subscribed or not
-        if (!$this->moduleUtil->isSubscribed($business_id)) {
-            return $this->moduleUtil->expiredResponse();
-        }
+        // if (!$this->moduleUtil->isSubscribed($business_id)) {
+        //     return $this->moduleUtil->expiredResponse();
+        // }
 
         $taxes = TaxRate::where('business_id', $business_id)
                         ->ExcludeForTaxGroup()

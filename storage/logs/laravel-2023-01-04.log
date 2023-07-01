@@ -1,0 +1,2 @@
+[2023-01-04 12:49:07] local.EMERGENCY: ERROR: NOT ALLOWED: Mismatch between sold and purchase quantity. Product: Hand gloves SKU: sku0041 Quantity: 1 Business: Digital Xpress Location: Head Office  
+[2023-01-04 12:49:07] local.EMERGENCY: File:/home/adigita3/dxerp.adigitalxpress.com/app/Utils/TransactionUtil.phpLine:3035Message:ERROR: NOT ALLOWED: Mismatch between sold and purchase quantity. Product: Hand gloves SKU: sku0041 Quantity: 1  

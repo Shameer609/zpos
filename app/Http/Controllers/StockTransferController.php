@@ -155,9 +155,9 @@ class StockTransferController extends Controller
         $business_id = request()->session()->get('user.business_id');
 
         //Check if subscribed or not
-        if (!$this->moduleUtil->isSubscribed($business_id)) {
-            return $this->moduleUtil->expiredResponse(action('StockTransferController@index'));
-        }
+        // if (!$this->moduleUtil->isSubscribed($business_id)) {
+        //     return $this->moduleUtil->expiredResponse(action('StockTransferController@index'));
+        // }
 
         $business_locations = BusinessLocation::forDropdown($business_id);
 

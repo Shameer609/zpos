@@ -12,7 +12,7 @@
 				<div class="modal-body">
 					@if(count($business_locations) == 1)
 						@php 
-							$default_location = current(array_keys($business_locations->toArray())) 
+							$default_location = current(array_keys($business_locations->toArrtaay())) 
 						@endphp
 					@else
 						@php $default_location = null; @endphp
@@ -85,6 +85,78 @@
 						{!! Form::textarea('booking_note', null, ['class' => 'form-control','placeholder' => __( 'restaurant.customer_note' ), 'rows' => 3 ]); !!}
 						</div>
 					</div>
+					
+					<table class="table" id="booking">
+					    <thead>
+					    <tr>
+					        <th>Particulars</th>
+					        <th>Amount</th>
+					        <th>Set Of Instructions</th>
+					        <th>Action</th>
+					    </tr>
+					    </thead>
+					    
+					    <tbody id="tbody">
+					    <tr>
+					        <td>
+					            <select name="particular[]" id="particular" required >
+					                @foreach($product as $p)
+					                <option value="{{$p->id}}">{{$p->name}}</option>
+					               	@endforeach
+					            </select>
+					       </td>
+					        <td><input type="number" name="Item_amount[]"  value="0" onkeyup="total_value()" class="form-control item-amount"></td>
+					        <td><input type="text" name="instructions[]" class="form-control"></td>
+					   
+					   	<td> <button class="btn btn-md btn-primary addBtn" type="button"  onclick="add_row(this)" style="padding: 0px 5px 2px 5px;">
+						<i class="fa fa-plus-circle" aria-hidden="true"></i>
+						</button>
+						<button class="btn btn-danger remove" type="button" onclick="remove_row(this)" style="padding: 0px 5px 2px 5px;"><i class="fa fa-trash" aria-hidden="true"></i></button>
+						</td>
+					    </tr>
+					    
+					    </tbody>
+					    
+					    
+					  
+					   <tr>
+					        <td>Discount</td>
+					        <td><input type="number" name="discount" id="discount" name="Discount" onkeyup="total_value()" value="0" class="form-control discount"></td>
+					        <td></td>
+					    </tr>
+					    
+					       <tr>
+					        <td>Total</td>
+					        <td><input type="text" name="total" readonly id="total" value="0"  name="Total" class="form-control total_val"></td>
+					        <td></td>
+					    </tr>
+					  
+					    
+					</table>
+					
+					</br>
+					<h4>Payment Details</h4>
+					
+					<table class="table">
+					    <thead>
+					        <tr>
+					             <th>Type</th>
+					            <th>Total Amount</th>
+					             <th>Advance Amount</th>
+					        </tr>
+					    </thead>
+					    <tbody>
+					        <tr>
+					            <td>Cash</td>
+					           <td><input type="text" name="total_amount" readonly id="total" value="0"  name="Total" required class="form-control total_val"></td>
+					           <td><input type="text" name="advance_amount" id="total" value="0" required  name="Total" class="form-control "></td>
+					        </tr>
+					    </tbody>
+					</table>
+					
+					
+					
+					
 					<div class="col-sm-12">
 						<div class="form-group">
 						<div class="checkbox">
@@ -103,4 +175,5 @@
 
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
+
 </div>

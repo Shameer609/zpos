@@ -58,7 +58,7 @@ class Booking extends Model
             'booking_start' => $input['booking_start'],
             'booking_end' => $input['booking_end'],
             'created_by' => $input['created_by'],
-            'booking_status' => isset($input['booking_status']) ? $input['booking_status'] : 'booked',
+            'booking_status' => isset($input['booking_status']) ? $input['booking_status'] : 'waiting',
             'booking_note' => $input['booking_note']
         ];
         $booking = Booking::create($data);
